@@ -23,6 +23,13 @@ The system aims to provide parents with a comprehensive platform for managing th
 ## Definition :
 
 ## Functional Requirements :
+User Registration and Authentication
+Users (parents and healthcare providers) must register with valid credentials.
+Two-factor authentication for enhanced security.
+
+ Child Profile Management
+Parents can add, edit, and delete child profiles.
+Include fields for basic demographics, medical history, and relevant contact information.
 
 Vaccination Slot Booking:
 Parents will be able to schedule vaccination appointments for their children.
@@ -35,12 +42,16 @@ Online Consulting:
 Healthcare professionals will be able to conduct secure video calls or chat consultations.
 Appointment scheduling for online consultations will be available.
 
-Diet Plan:
+Diet Plans:
 Parents will have access to view and follow diet plans for their children.
 
 Disease Information:
 -Information on various diseases, especially those preventable through vaccination, will be available.
 -The system will include a search functionality for disease information.
+
+Vaccine Information
+Comprehensive details on vaccines, including composition, recommended age groups, and potential side effects.
+Links to official health sources for further reading.
 
 Health Records:
 -Parents and healthcare providers will be able to access and update digital health records.
