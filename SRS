@@ -92,7 +92,7 @@ Separate enviornment will be maintained for system for isolation in production, 
 3.7Portablility:
 
 PDA: Portable Device Application
-Portable divice application system will be provided portable user interface through users will be able to access online web based system.
+Portable device application system will be provided portable user interface through users will be able to access online web based system.
 System can be deployed to single server, multi server, to any OS, Cloud (Azure or AWS or GCP).
 
 Accessibility:
