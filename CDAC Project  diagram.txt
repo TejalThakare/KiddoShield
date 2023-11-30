@@ -233,7 +233,7 @@ Level 1 DFD - Healthcare Provider Processes:
 | - email         |     | - dateOfBirth    |     | - dateAdministered  |     
 | - hashedPassword|     | - gender         |     | - dosage            |     
 | - userType      |     | - address        |     | - administeringProv|     
-| - lastLogin     |     | - bloodType      |     | - administeringLoc |
+| -    lastLogin  |     | - bloodType      |     | - administeringLoc |
 |                 |     +------------------+     | - sideEffects       |
 |                 |                              +---------------------+
 +-----------------+
@@ -248,3 +248,22 @@ Level 1 DFD - Healthcare Provider Processes:
 | - virtualConsultationLink|     | - contactInfo             |     +--------------------------+
 | - consultationNotes      |     +--------------------------+
 +--------------------------+
+
+CREATE table user_registraton(uid varchar(10) primary KEY, uFirstname varchar(20), 
+uLastName varchar(20), username VARCHAR(30) not NULL UNIQUE, uPassword  varchar(20) NOT null LENGTH>6,
+emailId VARCHAR(50),address varchar(100),contact VARCHAR(10));
+
+CREATE table child_registration(cid varchar(10) PRIMARY KEY,cFirstName VARCHAR(20), age INTEGER,
+weight DOUBLE, bloodGroup VARCHAR(10),gender CHARACTER,dob VARCHAR(20),cid FOREIGN key REFERENCES 
+user_registraton(UID));
+
+CREATE TABLE hospital(hid VARCHAR(10), hName VARCHAR(50), address VARCHAR(100), contact VARCHAR(10)
+emergencyNum VARCHAR(10),UID VARCHAR(10) FOREIGN KEY REFERENCES AS(UID),
+did VARCHAR(10) FOREIGN KEY REFERENCES AS(did));
+
+CREATE TABLE doctor_registration(did VARCHAR(10) PRIMARY KEY,dFirstName VARCHAR(20),dLastName VARCHAR(20),
+specialization VARCHAR(30),Contact VARCHAR(10));
+
+CREATE TABLE appointment(aid VARCHAR(10) PRIMARY KEY,apType varchar(100));
+
+CREATE TABLE appointment(aid VARCHAR(10) PRIMARY KEY,apType varchar(100));
