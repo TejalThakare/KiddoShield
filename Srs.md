@@ -21,33 +21,33 @@ The Child Health and Vaccination Website is an online platform that allows paren
 
 ## Functional Requirements :
 User Registration and Authentication:
-Users (parents and healthcare providers) must register with valid credentials.
+-Users (parents and healthcare providers) must register with valid credentials.
 
 Child Profile Management:
-Parents can add, edit, and delete child profiles.
-Include fields for medical history, and relevant contact information.
+-Parents can add, edit, and delete child profiles.
+-Include fields for medical history, and relevant contact information.
 
 Vaccination Slot Booking:
-Parents will be able to schedule vaccination appointments for their children.
-The system will provide a calendar view for available vaccination slots.
+-Parents will be able to schedule vaccination appointments for their children.
+-The system will provide a calendar view for available vaccination slots.
 
 Reminders:
-Automated reminders will be sent to parents leading up to schedule vaccinations.
+-Automated reminders will be sent to parents leading up to schedule vaccinations.
 
 Online Consulting:
-Healthcare professionals will be able to conduct secure video calls or chat consultations.
-Appointment scheduling for online consultations will be available.
+-Healthcare professionals will be able to conduct secure video calls or chat consultations.
+-Appointment scheduling for online consultations will be available.
 
 Diet Plans:
-Parents will have access to view and follow diet plans for their children.
+-Parents will have access to view and follow diet plans for their children.
 
 Disease Information:
 -Information on various diseases, especially those preventable through vaccination, will be available.
 -The system will include a search functionality for disease information.
 
 Vaccine Information
-Comprehensive details on vaccines,recommended age groups, and potential side effects.
-Links to official health sources for further reading.
+-Comprehensive details on vaccines,recommended age groups, and potential side effects.
+-Links to official health sources for further reading.
 
 Health Records:
 -Parents and healthcare providers will be able to access and update digital health records.
@@ -79,31 +79,26 @@ Security:
 -Access to sensitive information will be logged and monitored for unauthorized access.
 
 Maintainability:
-A database software will be used to maintain System data Persistence.
-IT operations team will easily monitor and configure System using Adminstrative tools provided by Servers.
-Separate enviornment will be maintained for system for isolation in production, testing, and development.
-
-Portablility:
-PDA: Portable Device Application
-Portable device application system will be provided portable user interface through users will be able to access online web based system.
-System can be deployed to single server, multi server, to any OS, Cloud (Azure or AWS or GCP).
+-A database software will be used to maintain System data Persistence.
+-IT operations team will easily monitor and configure System using Adminstrative tools provided by Servers.
+-Separate enviornment will be maintained for system for isolation in production, testing, and development.
 
 Accessibility:
-only parents and hospital will be able to login on website after authentication.
+-only parents and hospital will be able to login on website after authentication.
 
 Durability:
-The system will maintain child details.
-The system will implement backup and recovery for retaining data over the time.
-The system will use cache for faster data retrieval and improved performance.
+-The system will maintain child details.
+-The system will implement backup and recovery for retaining data over the time.
+-The system will use cache for faster data retrieval and improved performance.
 
 Efficiency:
-Maximum number of parents can login to website at same time.
-The system architecture should be scalable to handle an increasing number of users and data.
-System will be able to manage load.
+-Maximum number of parents can login to website at same time.
+-The system architecture should be scalable to handle an increasing number of users and data.
+-System will be able to manage load.
 
 Modularity:
-System will designed and developed using reusable, independent senarios in the form of modules.
-These modules will be loosely coupled and highly cohesive.
+-System will designed and developed using reusable, independent senarios in the form of modules.
+-These modules will be loosely coupled and highly cohesive.
 
 
  Safety:
@@ -114,17 +109,15 @@ These modules will be loosely coupled and highly cohesive.
 
 ## Constraints
 
-The web application should support common web browser such as chrome , safari, Firefox.
-Compliance with relevant data protection and regulations.
+-The web application should support common web browser such as chrome , safari, Firefox.
+-Compliance with relevant data protection and regulations.
 
 ## Assumptions and Dependencies
 
 Data Accuracy :
-
-Assume users provide accurate and up-to-date information.
-Implement data validation checks during input.
+-Assume users provide accurate and up-to-date information.
+-Implement data validation checks during input.
 
 Internet Connectivity:
-
-Users are expected to have a stable internet connection for real-time updates, notifications, and virtual consultations.
+-Users are expected to have a stable internet connection for real-time updates, notifications, and virtual consultations.
 
