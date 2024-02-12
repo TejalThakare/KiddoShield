@@ -118,6 +118,6 @@ Data Accuracy :
 -Assume users provide accurate and up-to-date information.
 -Implement data validation checks during input.
 
-Internet Connectivity:
+Internet Connectivity :
 -Users are expected to have a stable internet connection for real-time updates, notifications, and virtual consultations.
 
