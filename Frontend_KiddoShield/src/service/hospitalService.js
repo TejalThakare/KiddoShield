@@ -50,5 +50,14 @@ class HospitalService {
   removeDoctor(did) {
     return axios.delete(baseUrl + "/deletedoctor/" + did);
   }
+  updateDoctor(did, data) {
+    return axios.put(baseUrl + "/updatedoctor/" + did, data);
+  }
+
+  //get all feedback
+  getAllFeedback() {
+    let hid = 1;
+    return axios.get(baseUrl + "/feedbacks/" + hid);
+  }
 }
 export default new HospitalService();

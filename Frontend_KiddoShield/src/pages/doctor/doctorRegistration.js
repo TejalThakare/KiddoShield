@@ -52,7 +52,8 @@ export default function HospitalRegistration() {
       formdetails.specialization === "" ||
       formdetails.dfname === "" ||
       formdetails.dlname === "" ||
-      formdetails.contact === null||""
+      formdetails.contact === null ||
+      ""
     ) {
       swal("Please fill all the fields");
     } else {

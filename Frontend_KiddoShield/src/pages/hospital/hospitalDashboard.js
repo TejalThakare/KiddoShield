@@ -41,7 +41,7 @@ export default function HosspitalDashboard() {
   const signOut = () => {
     setIsLoggedIn(false);
   };
-
+  // -------------------------------------------------------------
   return (
     <>
       <nav
@@ -215,22 +215,23 @@ export default function HosspitalDashboard() {
             <div className="card-body">
               <img
                 class="card-img-top"
-                src="images/child.jpg"
+                src="images/feedback.jpg"
                 alt="Card image cap"
                 height={300}
                 width={500}
               />
               <hr></hr>
-              <h5 className="card-title">Appointments</h5>
-              <p className="card-text">Appointments</p>
-              <a
+              <h5 className="card-title">Feedback</h5>
+              <p className="card-text">see all Feedbacks</p>
+              <Link
+
                 id="dashboard-button"
-                href="#"
+                to="/hospital/feedbacks"
                 class="btn btn-outline-warning rounded-pill "
                 onClick={() => window.scrollTo(0, 0)}
               >
                 Click Here
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -238,6 +239,7 @@ export default function HosspitalDashboard() {
       {/* {open && <HospitalLogin></HospitalLogin>} */}
 
       {/* ---------------------------------------------- */}
+      {/*--------------- login---------------------------- */}
       <div
         className="modal fade"
         id="modalopen"

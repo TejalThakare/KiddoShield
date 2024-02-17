@@ -14,5 +14,10 @@ class UserService {
   deleteChildren(cid) {
     return axios.delete(baseUrl + "children/" + cid);
   }
+  giveFeedback(feedback) {
+    let hid = 1;
+    let uid = 2;
+    return axios.post(baseUrl + `loginuser/${hid}/${uid}`, feedback);
+  }
 }
 export default new UserService();

@@ -22,6 +22,9 @@ import HospitalRegistration from "./pages/hospital/hospitalRegistration";
 import HospitalLogin from "./pages/hospital/hospitalLogin";
 import DoctorRegistration from "./pages/doctor/doctorRegistration";
 import AllDoctors from "./pages/doctor/allDoctors";
+import Feedback from "./pages/hospital/userFeedback";
+import AllFeedback from "./pages/hospital/allFeedbacks";
+import UpdateDoctor from "./pages/doctor/updateDoctor";
 function App() {
   return (
     <>
@@ -141,6 +144,30 @@ function App() {
             element={
               <>
                 <AllDoctors></AllDoctors>
+              </>
+            }
+          ></Route>
+          <Route
+            path="/user/feedback"
+            element={
+              <>
+                <Feedback></Feedback>
+              </>
+            }
+          ></Route>
+          <Route
+            path="/hospital/feedbacks"
+            element={
+              <>
+                <AllFeedback></AllFeedback>
+              </>
+            }
+          ></Route>
+          <Route
+            path="/update/:did"
+            element={
+              <>
+                <UpdateDoctor></UpdateDoctor>
               </>
             }
           ></Route>

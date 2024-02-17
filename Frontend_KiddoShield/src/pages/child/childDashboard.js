@@ -4,6 +4,7 @@ import "../../styles/childHistory.css";
 import { useEffect, useState } from "react";
 import userService from "../../service/userService";
 import axios from "axios";
+import swal from "sweetalert";
 export default function ChildDashboard() {
   //---------------------------------------------------------------------
   //to delete child ffrom db
@@ -18,9 +19,8 @@ export default function ChildDashboard() {
         const response = await axios.delete(
           `http://localhost:8086/api/User/deletechild/${id}`
         );
-        console.log(response);
       }
-      console.log(id);
+      swal("success");
     } catch (error) {
       console.error("Error deleting child:", error);
     } finally {

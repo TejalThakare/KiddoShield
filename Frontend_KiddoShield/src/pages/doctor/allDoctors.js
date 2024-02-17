@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 //css
 import "../../styles/childHistory.css";
 import hospitalService from "../../service/hospitalService";
-import { useNavigate } from "react-router-dom";
-import HospitalLogin from "../hospital/hospitalLogin";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 export default function AllDoctors() {
@@ -95,6 +94,9 @@ export default function AllDoctors() {
                 <th style={{ color: "#ffff" }} scope="col">
                   Remove
                 </th>
+                <th style={{ color: "#ffff" }} scope="col">
+                  Update Info
+                </th>
                 {/* <th  scope="col">Click</th> */}
               </tr>
             </thead>
@@ -115,6 +117,20 @@ export default function AllDoctors() {
                     >
                       Click Here
                     </button>
+                  </td>
+                  <td>
+                    <Link
+                      className="btn btn-outline-dark rounded-pill"
+                      // to={{
+                      //   pathname: "/doctor/update",
+                      //   state: { doctor: ob },
+                      // }}
+
+                      to={`/update/${ob.did}`}
+                      state={{ pdata: ob }}
+                    >
+                      Click Here
+                    </Link>
                   </td>
                 </tr>
               ))}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../../service/userService";
+import swal from "sweetalert";
 
 export default function Registration() {
   const [formdetails, setformdetails] = useState({
@@ -48,6 +49,7 @@ export default function Registration() {
           gender: "",
           dob: "",
         });
+        swal("Registered successfull");
         navigate("/ChildDashboard/2");
       })
       .catch((err) => {
