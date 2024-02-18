@@ -101,7 +101,7 @@ export default function AllDoctors() {
               </tr>
             </thead>
             <tbody align="center" style={{ fontSize: "19px" }}>
-              {plist.map((ob) => (
+              {plist?.map((ob) => (
                 <tr>
                   <td>{ob.did}</td>
                   <td>{ob.dfname}</td>
@@ -121,11 +121,6 @@ export default function AllDoctors() {
                   <td>
                     <Link
                       className="btn btn-outline-dark rounded-pill"
-                      // to={{
-                      //   pathname: "/doctor/update",
-                      //   state: { doctor: ob },
-                      // }}
-
                       to={`/update/${ob.did}`}
                       state={{ pdata: ob }}
                     >

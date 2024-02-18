@@ -5,23 +5,19 @@ import {
   useParams,
 } from "react-router-dom";
 import "../../styles/scheduleVaccination.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import userService from "../../service/userService";
-export default function ScheduleVaccination() {
-  const location = useLocation();
+export default function RescheduleVaccination() {
   const navigate = useNavigate();
-  const childData = location.state.pdata;
-  const userData = location.state.user;
-  const queryString = Object.keys(userData)
-    .map(
-      (key) => `${encodeURIComponent(key)}=${encodeURIComponent(userData[key])}`
-    )
+  const location = useLocation();
+  const { data } = location.state;
+  const queryString = Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
     .join("&");
-  console.log(childData.cid);
   const [formdetails, setFormDetails] = useState({
-    cid: childData.cid,
-    email: userData.email,
+    cid: "",
+    email: data.email,
     date: "",
     time: "",
     contact: "",
@@ -29,6 +25,7 @@ export default function ScheduleVaccination() {
   });
   const submitData = async () => {
     if (
+      formdetails.cid === "" ||
       formdetails.date === "" ||
       formdetails.time === "" ||
       formdetails.contact === "" ||
@@ -39,8 +36,8 @@ export default function ScheduleVaccination() {
     } else {
       try {
         console.log(formdetails);
-        const response = await userService.vaccineAppointment(
-          userData.uid,
+        const response = await userService.RescheduleVaccineAppointment(
+          data.uid,
           formdetails
         );
         if (response.status === 200) {
@@ -58,7 +55,6 @@ export default function ScheduleVaccination() {
       }
     }
   };
-
   return (
     <>
       <nav
@@ -86,34 +82,37 @@ export default function ScheduleVaccination() {
       </div>
       <form className="form-schedule">
         <div id="schedule-vacc" className="container">
+          <h2 className="text-center">
+            <b>Reschedule Appointment</b>
+          </h2>
           <label for="uname">Enter Email</label>
           <input
             disabled
-            value={userData.email}
+            // value={userData.email}
             type="text"
             className="form-control"
             id="user-name"
             aria-describedby="name"
+            value={data.email}
             placeholder=" Enter email"
-            onChange={(e) => {
-              setFormDetails({
-                ...formdetails,
-                email: e.target.value,
-              });
-            }}
           />
           <label for="uname">Enter Children Id</label>
           <input
-            disabled
-            type="text"
-            value={childData.cid}
+            type="number"
             className="form-control"
             id="user-name"
             aria-describedby="uname"
-            placeholder=" Enter Id"
+            placeholder=" Enter child id"
+            onChange={(e) => {
+              setFormDetails({
+                ...formdetails,
+                cid: e.target.value,
+              });
+            }}
           />
           <label for="uname">Select Date</label>
           <input
+            required
             type="date"
             className="form-control"
             id="date-time"
@@ -128,6 +127,7 @@ export default function ScheduleVaccination() {
           />
           <label for="cnumber">Select Time</label>
           <input
+            required
             style={{ fontSize: "150%" }}
             type="time"
             className="form-control"
@@ -143,6 +143,7 @@ export default function ScheduleVaccination() {
           />
           <label for="cnumber">Mobile number</label>
           <input
+            required
             type="number"
             className="form-control"
             id="mob-num"

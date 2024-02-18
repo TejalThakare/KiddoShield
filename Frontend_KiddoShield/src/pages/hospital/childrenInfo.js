@@ -54,7 +54,7 @@ export default function ChildrenInfo() {
               </tr>
             </thead>
             <tbody align="center" style={{ fontSize: "19px" }}>
-              {plist.map((ob) => (
+              {plist?.map((ob) => (
                 <tr>
                   <td>{ob.cid}</td>
                   <td>{ob.cfname}</td>

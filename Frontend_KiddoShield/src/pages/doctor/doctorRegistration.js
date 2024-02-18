@@ -213,7 +213,7 @@ export default function HospitalRegistration() {
               id="signup"
               onClick={signUpHandler}
             >
-              SignUp
+              Register
             </button>
           </form>
         </div>

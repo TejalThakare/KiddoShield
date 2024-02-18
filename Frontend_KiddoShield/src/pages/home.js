@@ -1,8 +1,38 @@
 import "../styles/home.css";
 
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
+  const lazyImagesRef = useRef([]);
+
+  useEffect(() => {
+    const options = {
+      threshold: 0.9,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        console.log(entry);
+        if (entry.isIntersecting) {
+          const lazyImage = entry.target;
+          lazyImage.src = lazyImage.dataset.src;
+          lazyImage.classList.remove("lazy-img");
+          observer.unobserve(lazyImage);
+        }
+      });
+    }, options);
+
+    lazyImagesRef.current.forEach((img) => {
+      if (img) {
+        observer.observe(img);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
   return (
     <>
       <header className="header">
@@ -33,12 +63,17 @@ export default function Home() {
 
       <section className="section" id="section--1">
         <div className="section__title">
-          <h2 className="section__description">Features</h2>
+          <h2 className="section__description">Information</h2>
+          <h1 style={{ fontSize: "40px" }}>
+            <b>Everything you need to know about vaccines and health.</b>
+          </h1>
         </div>
 
         <div className="features">
           <img
+            ref={(img) => lazyImagesRef.current.push(img)}
             src="images/child.jpg"
+            data-src="images/child.jpg"
             alt="Computer"
             className="features__img lazy-img"
           />
@@ -47,7 +82,7 @@ export default function Home() {
             <h5 className="features__header">
               <b> Recommended Vaccines by Age</b>
             </h5>
-            <p>
+            <p style={{ textAlign: "justify" }}>
               Vaccines prevent illness, disability and ensuring children's
               health and well-being. By immunizing against contagious diseases,
               vaccinations also create a shield of protection for vulnerable
@@ -76,29 +111,41 @@ export default function Home() {
           </div>
           <img
             style={{ marginTop: "7%" }}
+            ref={(img) => lazyImagesRef.current.push(img)}
             src="images/img1"
-            data-src="img/grow.jpg"
+            data-src="images/img1"
             alt="Plant"
             className="features__img lazy-img"
           />
 
           <img
-            style={{ marginTop: "8%" }}
+            style={{ marginTop: "10%" }}
+            ref={(img) => lazyImagesRef.current.push(img)}
             src="images/diseaseimg.jpg"
             data-src="images/diseaseimg.jpg"
             alt="Credit card"
             className="features__img lazy-img"
           />
-          <div className="features__feature">
+          <div style={{ marginTop: "10%" }} className="features__feature">
             <div className="features__icon"></div>
             <h5 className="features__header">
-              <b>Free debit card included</b>
+              <b>Diseases</b>
             </h5>
-            <p>
-              Quasi, fugit in cumque cupiditate reprehenderit debitis animi enim
-              eveniet consequatur odit quam quos possimus assumenda dicta fuga
-              inventore ab.
+            <p style={{ textAlign: "justify" }}>
+              Diseases encompass a wide range of health conditions that
+              negatively affect the normal functioning of the body. They can be
+              caused by various factors such as pathogens genetic mutations,
+              environmental factors, lifestyle choices, and underlying medical
+              conditions.
             </p>
+            <h5>
+              <Link
+                to="/vaccinesByAge"
+                className="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >
+                Click Here →
+              </Link>
+            </h5>
           </div>
         </div>
       </section>
@@ -263,6 +310,7 @@ export default function Home() {
             </div>
           </a>
         </div>
+
         <hr></hr>
         <h2 id="faq-header" className="section__description">
           FAQ's

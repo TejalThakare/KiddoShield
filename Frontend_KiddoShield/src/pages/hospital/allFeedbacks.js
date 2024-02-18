@@ -28,7 +28,11 @@ export default function AllFeedback() {
           <img src="/images/kidLogo.png" style={{ width: "150px" }} />
         </Link>
       </nav>
-      <div className="container" id="feedback-container">
+      <div
+        className="container"
+        id="feedback-container"
+        style={{ marginBottom: "10%" }}
+      >
         <div className="leftFeedback">
           {/* Left portion */}
           <h2 className="feedbackHeader">Check out all feedback</h2>

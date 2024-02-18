@@ -32,8 +32,9 @@
 }
 
 #dashboard-register-btn{
-    margin-top: -6.5%;
+    /* margin-top: -6.5%; */
     margin-bottom: 1%;
+    
 }
 .card > .card-header{
     font-size: 22px;
@@ -42,6 +43,7 @@
 #dashboard-card{
     margin-top: 11% ;
     margin-bottom: 10%;
+    min-height: 60vh;
 }
 #history-app-btn{
     justify-content: space-between; 
@@ -59,7 +61,7 @@ margin-right: 3%;
     border-radius: 50%;
     box-shadow: 6px 6px 10px gray;
     align-self: center;
-    margin-top:-115px;
+    margin-top:-125px;
 }
 
 #card-body{ 

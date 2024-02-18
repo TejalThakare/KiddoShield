@@ -1,4 +1,10 @@
-import { Link, useLinkClickHandler, useParams } from "react-router-dom";
+import {
+  Link,
+  json,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 // import "../styles/childHistory.css";
 import "../../styles/childHistory.css";
 import { useEffect, useState } from "react";
@@ -6,23 +12,37 @@ import userService from "../../service/userService";
 import axios from "axios";
 import swal from "sweetalert";
 export default function ChildDashboard() {
+  const navigate = useNavigate();
+
+  //get the key values from query string
+  const { queryParam } = useParams();
+
+  const paramsArray = queryParam.split("&");
+  const userInfo = {};
+  paramsArray.forEach((param) => {
+    const [key, value] = param.split("=");
+    //use to decode the url like %
+    userInfo[key] = decodeURIComponent(value);
+  });
+
   //---------------------------------------------------------------------
-  //to delete child ffrom db
-  const [id, setId] = useState("");
+
+  //to delete child from db
+  const [cid, setId] = useState("");
   const handler = (e) => {
     setId(e.currentTarget.id);
     e.preventDefault();
   };
-  const yesNoHandler = async (e) => {
+  let yesNoHandler = async (e) => {
     try {
       if (e.target.id === "Yes") {
         const response = await axios.delete(
-          `http://localhost:8086/api/User/deletechild/${id}`
+          `http://localhost:8086/api/User/deletechild/${cid}` //cid child id
         );
+        swal("success");
       }
-      swal("success");
     } catch (error) {
-      console.error("Error deleting child:", error);
+      swal("something went wrong");
     } finally {
       window.location.reload();
     }
@@ -33,9 +53,8 @@ export default function ChildDashboard() {
   const [plist, setplist] = useState([]);
   const fetchdata = () => {
     userService
-      .getChildren()
+      .getChildren(userInfo.uid) //user id
       .then((result) => {
-        console.log(result.data);
         setplist([...result.data]);
       })
       .catch((err) => {
@@ -46,6 +65,79 @@ export default function ChildDashboard() {
     fetchdata();
   }, []);
   //----------------------------------------------------------------------
+  //to delete user
+  const userProfileHandler = async (e) => {
+    if (e.target.value === "delete") {
+      try {
+        userService.deleteUser(userInfo.uid).then((res) => {
+          console.log(res);
+        });
+        navigate("/");
+        swal("success");
+      } catch (error) {
+        console.log(error);
+        swal("something went wrong");
+      } finally {
+        window.location.reload();
+      }
+    } // for  update
+    if (e.currentTarget.value === "update") {
+      navigate("/updateuser/" + userInfo.uid, { state: { data: userInfo } });
+    }
+    if (e.currentTarget.value === "feedback") {
+      navigate("/user/feedback/" + userInfo.uid, {
+        state: { data: userInfo },
+      });
+    }
+    if (e.target.value === "appointment") {
+      navigate("/reschedulevaccine/" + userInfo.uid, {
+        state: { data: userInfo },
+      });
+    }
+  };
+  // -------------------------------------------------------------
+  //for showing appointment
+  const [info, setInfo] = useState();
+  const AppointmentHandler = async (e) => {
+    console.log(userInfo.uid);
+    try {
+      const res = await userService.ShowVaccineAppointment(userInfo.uid);
+      console.log(res);
+      if (res.data.length === 1) {
+        const responseData = res.data;
+        const information = responseData?.map((data, index) => {
+          return ` you have an appoinment on ${data.date}  at ${data.time},children Id ${data.cid}`;
+        });
+        setInfo(information);
+      } else {
+        const responseData = res.data;
+        const information = responseData?.map((data, index) => {
+          return (
+            <div key={index}>
+              <p>
+                Appointment date: {data.date} at {data.time}, children ID{" "}
+                {data.cid}
+              </p>
+            </div>
+          );
+        });
+
+        setInfo(information);
+      }
+    } catch (error) {
+      swal("something went wrong");
+    }
+  };
+
+  //-----------------------------------------------------------------
+  //reschedule handler
+  const rescheduleHabdler = () => {
+    navigate("/reschedulevaccine/" + userInfo.uid, {
+      state: { data: userInfo },
+    });
+  };
+
+  //--------------------------------------------------------------------
   return (
     <>
       <nav
@@ -61,10 +153,86 @@ export default function ChildDashboard() {
             id="logo"
           />
         </a>
+        {/* --------------------------------------------------------- */}
+        {/* dropdown for select action */}
+        <select onChange={userProfileHandler} className="btn btn-dark ">
+          <option>Profile</option>
+          <option value={"update"}>Update</option>
+          <option value={"delete"}>Delete</option>
+          <option value={"feedback"}>Feedback</option>
+          <option value={"appointment"}>appointment</option>
+          <option value={"signout"}>SignOut</option>
+        </select>
       </nav>
-      <div id="dashboard-card" className="card">
-        <div className="card-header">Children Datails</div>
 
+      <div id="dashboard-card" className="card">
+        <div style={{ backgroundColor: "black" }}>
+          <div style={{ marginLeft: "1%" }}>
+            <h2 className="text text-white">Welcome back {userInfo.fname}</h2>
+          </div>
+        </div>
+        <div className="card-header" style={{ display: "flex" }}>
+          <div>Children Datails</div>
+          {/* -------------------------------------------------- */}
+          {/* button for showing appointment */}
+          <button
+            style={{ marginLeft: "68%" }}
+            type="button"
+            class="btn btn-dark "
+            data-toggle="modal"
+            data-target="#appointment"
+            onClick={AppointmentHandler}
+          >
+            Show Appointment
+          </button>
+          <div
+            class="modal fade"
+            id="appointment"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="appointment"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">
+                    Appointments
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  {/* printing the information about the appointments */}
+                  <p>{info}</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    data-dismiss="modal"
+                    className="btn btn-dark"
+                    onClick={rescheduleHabdler}
+                  >
+                    Reschedule
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    okay
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* ----------------------------------------------------------------------- */}
         <img src="/images/childID1.jpg" id="card-img-kid"></img>
         <div className="card-body" id="card-body">
           <blockquote style={{ marginTop: "-2%" }} className="blockquote mb-0">
@@ -96,9 +264,9 @@ export default function ChildDashboard() {
                   <hr></hr>
                   <div id="history-app-btn" className="text-end">
                     <Link
-                      // onClick={handler}
-                      id="history-btn"
                       to={`/updateChildInfo/${child.cid}`}
+                      state={{ pdata: child, userinfo: userInfo }}
+                      id="history-btn"
                       style={{ color: "#571365" }}
                       className="btn btn-warning btn-sm"
                       data-toggle="modal"
@@ -142,7 +310,8 @@ export default function ChildDashboard() {
                         <li id="vaccination" style={{ marginLeft: "5%" }}>
                           <Link
                             className="appointment-link"
-                            to="/scheduleVaccine"
+                            to={"/scheduleVaccine/" + userInfo.uid}
+                            state={{ pdata: child, user: userInfo }}
                           >
                             Vaccination
                           </Link>
@@ -168,7 +337,8 @@ export default function ChildDashboard() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
-                to="/ChildRegistration"
+                to={`/ChildRegistration/${userInfo.uid}`}
+                state={{ user: userInfo }}
                 className="btn btn-outline-primary"
               >
                 + Register

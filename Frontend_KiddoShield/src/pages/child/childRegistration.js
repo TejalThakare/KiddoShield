@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import userService from "../../service/userService";
 import swal from "sweetalert";
 
-export default function Registration() {
+export default function ChildRegistration() {
+  const location = useLocation();
+  const { user } = location.state;
+  console.log(user);
+
+  const queryString = Object.keys(user)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(user[key])}`)
+    .join("&");
+  console.log(queryString);
   const [formdetails, setformdetails] = useState({
     // cid: "",
     cfname: "",
@@ -38,7 +46,7 @@ export default function Registration() {
       return;
     }
     userService
-      .registerChild(formdetails)
+      .registerChild(user.uid, formdetails)
       .then((res) => {
         setformdetails({
           // cid: "",
@@ -50,10 +58,10 @@ export default function Registration() {
           dob: "",
         });
         swal("Registered successfull");
-        navigate("/ChildDashboard/2");
+        navigate("/ChildDashboard/" + queryString);
       })
       .catch((err) => {
-        alert("something went wrong");
+        swal("something went wrong");
       });
   };
   return (
@@ -199,89 +207,6 @@ export default function Registration() {
                     }}
                   />
                   <div className="gen" style={{ marginTop: "3%" }}>
-                    {/* <label className="gen">Gender :</label>
-                    &nbsp;&nbsp;&nbsp;
-                    <label className="gender" for="male">
-                      Male
-                    </label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input
-                      value={formdetails.gender}
-                      onChange={(event) => {
-                        setformdetails({
-                          ...formdetails,
-                          gender: event.target.value,
-                        });
-                      }}
-                      type="radio"
-                      id="male"
-                      name="gender"
-                    />
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <label className="gender" for="female">
-                      Female
-                    </label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input
-                      type="radio"
-                      id="female"
-                      name="gender"
-                      // value="female"
-                      value={formdetails.gender}
-                      onChange={(event) => {
-                        setformdetails({
-                          ...formdetails,
-                          gender: event.target.value,
-                        });
-                      }}
-                    />
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <label className="gender" for="other">
-                      Other
-                    </label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input
-                      type="radio"
-                      id="other"
-                      name="gender"
-                      // value="other"
-                      value={formdetails.gender}
-                      onChange={(event) => {
-                        setformdetails({
-                          ...formdetails,
-                          gender: event.target.value,
-                        });
-                      }}
-                    /> */}
-                    {/* <label
-                      for="bloodGroup"
-                      style={{ paddingTop: "2%", marginLeft: "4%" }}
-                    >
-                      Blood Group :&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </label>
-                    <select
-                      className="btn btn-outline-secondary rounded-pill"
-                      id="bloodGroup"
-                      name="bloodGroup"
-                      value={formdetails.bloodgrp}
-                      onChange={(event) => {
-                        setformdetails({
-                          ...formdetails,
-                          bloodgrp: event.target.value,
-                        });
-                      }}
-                    >
-                      <option>Select</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                    </select> */}
-
                     <label for="gender" style={{ paddingTop: "2%" }}>
                       Gender :&nbsp; &nbsp;
                     </label>

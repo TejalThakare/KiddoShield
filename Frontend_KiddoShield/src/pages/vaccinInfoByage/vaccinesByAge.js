@@ -14,6 +14,7 @@ import { useState } from "react";
 export default function VaccineByAge() {
   const [state, setState] = useState("");
   const ageHandler = (e) => {
+    window.scrollTo(0, 0);
     console.log(e.target.id);
     setState(e.target.id);
   };

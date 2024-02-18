@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Footer.css";
 export default function Footer() {
- 
-
   return (
     <>
-    
-
       <footer className="footer">
         <ul className="footer__nav">
           <li className="footer__item">

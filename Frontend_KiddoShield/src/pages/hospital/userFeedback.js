@@ -1,7 +1,18 @@
 import swal from "sweetalert";
 import userService from "../../service/userService";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Feedback() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { data } = location.state;
+  console.log(data);
+
+  const queryString = Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&");
+  console.log(queryString);
+
   const submitFeedback = async (e) => {
     console.log("clicked");
     e.preventDefault();
@@ -16,10 +27,11 @@ export default function Feedback() {
 
       console.log(obj);
       try {
-        const response = await userService.giveFeedback(obj);
+        const response = await userService.giveFeedback(data.uid, obj);
         console.log(response);
         if (response.status == 200) {
           swal("Successful");
+          navigate("/Childdashboard/" + queryString);
         }
       } catch (error) {
         swal("Something went wrong");
@@ -44,9 +56,9 @@ export default function Feedback() {
           />
         </a>
       </nav>
-      <h1 className="text-center" style={{ marginTop: "8%", fontSize: "60px" }}>
-        <b> Feedback</b>
-      </h1>
+      <h6 className="text-center" style={{ marginTop: "8%", fontSize: "30px" }}>
+        <b> Hey {data.fname} here's your feedback form</b>
+      </h6>
       <div className="card " style={{ height: "100%" }}>
         <form>
           <div className="form-group ">
@@ -60,7 +72,7 @@ export default function Feedback() {
             />
           </div>
           <div className="form-group">
-            <label for="feedback">Give Password</label>
+            <label for="feedback">Give Feedback</label>
             <textarea
               rows={10}
               className="form-control"

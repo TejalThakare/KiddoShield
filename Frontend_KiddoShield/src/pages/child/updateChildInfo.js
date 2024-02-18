@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import userService from "../../service/userService";
+import swal from "sweetalert";
 
-export default function Registration() {
+export default function UpdateChildrenInfo() {
+  const location = useLocation(); //taking data from other component
+  const cid = useParams(); //take data from url
   const [formdetails, setformdetails] = useState({
     cid: "",
     cfname: "",
@@ -12,8 +15,30 @@ export default function Registration() {
     gender: "",
     dob: "",
   });
+
+  const data = location.state.pdata;
+  const user = location.state.userinfo;
+  console.log(user);
+  const queryString = Object.keys(user)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(user[key])}`)
+    .join("&");
+  console.log(queryString);
+  //
+  let obj = {
+    cid: data.cid,
+    age: data.age,
+    bloodgrp: data.bloodgrp,
+    cfname: data.cfname,
+    dob: data.dob,
+    gender: data.gender,
+    weight: data.weight,
+  };
+  useEffect(() => {
+    setformdetails({ ...obj });
+  }, []);
+  console.log(obj);
   const navigate = useNavigate();
-  const addChild = (e) => {
+  const addChild = async (e) => {
     e.preventDefault();
     if (
       formdetails.cid === "" ||
@@ -24,35 +49,28 @@ export default function Registration() {
       formdetails.gender === "" ||
       formdetails.dob === ""
     ) {
-      console.log(
-        formdetails.cid,
-        formdetails.cfname,
-        formdetails.age,
-        formdetails.weight,
-        formdetails.bloodgrp,
-        formdetails.gender,
-        formdetails.dob
-      );
-      alert("pls fill all the fieds");
+      swal("pls fill all the fieds");
       return;
+    } else {
+      try {
+        const response = await userService.updateChildInfo(
+          cid.cid,
+          formdetails
+        );
+        if (response.status === 200) {
+          swal("Good job!", "Updated Successfully!", "success");
+          navigate("/ChildDashboard/" + queryString);
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 404) {
+          swal("something went wrong try agin later");
+        } else {
+          swal(
+            "An error occurred while updating information. Please try again later."
+          );
+        }
+      }
     }
-    userService
-      .registerChild(formdetails)
-      .then((res) => {
-        setformdetails({
-          cid: "",
-          cfname: "",
-          age: "",
-          weight: "",
-          bloodgrp: "",
-          gender: "",
-          dob: "",
-        });
-        navigate("/ChildDashboard/2");
-      })
-      .catch((err) => {
-        alert("something went wrong");
-      });
   };
   return (
     <>
@@ -85,7 +103,7 @@ export default function Registration() {
       <div className="card ">
         <div className="card-body" style={{ marginTop: "2%" }}>
           <h2 className="text-center" id="signUpheader">
-            <b style={{ fontSize: "80%" }}>Update Information</b>
+            <b style={{ fontSize: "80%" }}>Update Child Information</b>
           </h2>
           <form>
             <div class="container" style={{ marginTop: "1%" }}>
@@ -122,6 +140,26 @@ export default function Registration() {
                       });
                     }}
                   />
+                  <label for="bloodgrp">Blood Group</label>
+                  <input
+                    disabled
+                    type="text"
+                    className="form-control"
+                    id="bloodgrp"
+                    aria-describedby="bloodgrp"
+                    placeholder="bloodgrp"
+                    value={formdetails.bloodgrp}
+                  />
+                  <label for="gender">Gender</label>
+                  <input
+                    disabled
+                    type="text"
+                    className="form-control"
+                    id="gender"
+                    aria-describedby="gender"
+                    placeholder="Gender"
+                    value={formdetails.gender}
+                  />
                 </div>
                 <div class="col-sm">
                   <label for="age">Age</label>
@@ -154,6 +192,16 @@ export default function Registration() {
                         cid: event.target.value,
                       });
                     }}
+                  />
+                  <label for="bloodGroup">Blood Group</label>
+                  <input
+                    disabled
+                    type="text"
+                    className="form-control"
+                    id="bloodGroup"
+                    aria-describedby="bloodGroup"
+                    placeholder="Blood group"
+                    value={formdetails.bloodgrp}
                   />
                 </div>
               </div>

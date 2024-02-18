@@ -25,6 +25,9 @@ import AllDoctors from "./pages/doctor/allDoctors";
 import Feedback from "./pages/hospital/userFeedback";
 import AllFeedback from "./pages/hospital/allFeedbacks";
 import UpdateDoctor from "./pages/doctor/updateDoctor";
+import UpdateUser from "./pages/user_login_registration/updateUser";
+import RescheduleVaccination from "./pages/userAppointment/rescheduleAppointment";
+// import ReScheduleVaccination from "./pages/userAppointment/rescheduleAppointment";
 function App() {
   return (
     <>
@@ -56,13 +59,17 @@ function App() {
               </>
             }
           ></Route>
-          <Route path="/ChildDashboard/2" element={<ChildDashboard />}></Route>
           <Route
-            path="/scheduleVaccine"
+            path="/ChildDashboard/:queryParam"
+            element={<ChildDashboard />}
+          ></Route>
+
+          <Route
+            path="/scheduleVaccine/:uid"
             element={<ScheduleVaccination />}
           ></Route>
           <Route
-            path="/ChildRegistration"
+            path="/ChildRegistration/:uid"
             element={<ChildRegistration />}
           ></Route>
           <Route path="/monthlyCheckUp" element={<MonthlyCheckUp />}></Route>
@@ -100,7 +107,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/updateChildInfo"
+            path="/updateChildInfo/:did"
             element={
               <>
                 <UpdateChildrenInfo></UpdateChildrenInfo>
@@ -148,7 +155,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/user/feedback"
+            path="/user/feedback/:uid"
             element={
               <>
                 <Feedback></Feedback>
@@ -156,7 +163,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/hospital/feedbacks"
+            path="/hospital/feedbacks/"
             element={
               <>
                 <AllFeedback></AllFeedback>
@@ -168,6 +175,22 @@ function App() {
             element={
               <>
                 <UpdateDoctor></UpdateDoctor>
+              </>
+            }
+          ></Route>
+          <Route
+            path="/updateuser/:uid"
+            element={
+              <>
+                <UpdateUser></UpdateUser>
+              </>
+            }
+          ></Route>
+          <Route
+            path="/reschedulevaccine/:uid"
+            element={
+              <>
+                <RescheduleVaccination></RescheduleVaccination>
               </>
             }
           ></Route>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import userService from "../../service/userService";
 import swal from "sweetalert";
+import queryString from "query-string";
 
 export default function Login() {
+  const location = useLocation();
   let loginid;
   const navigate = useNavigate();
 
@@ -28,7 +30,30 @@ export default function Login() {
       );
 
       if (response.data.status === true) {
-        navigate("/");
+        const res = await axios.get(
+          "http://localhost:8086/api/User/loginuser/" + obj.email
+        );
+        const data = res.data;
+        console.log(data);
+
+        //taking only issntial information to url ,fname,password
+        const filteredData = Object.keys(data)
+          .filter((key) => ["uid", "fname", "password", "email"].includes(key))
+          .reduce((obj, key) => {
+            obj[key] = data[key];
+            return obj;
+          }, {});
+        //here the url will be encoded
+        const queryString = Object.keys(filteredData)
+          .map(
+            (key) =>
+              `${encodeURIComponent(key)}=${encodeURIComponent(
+                filteredData[key]
+              )}`
+          )
+          .join("&");
+
+        navigate("/childDashboard/" + queryString);
         swal("login success");
       } else {
         swal("Wrong password");

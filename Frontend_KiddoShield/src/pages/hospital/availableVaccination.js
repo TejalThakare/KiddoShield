@@ -7,7 +7,6 @@ import swal from "sweetalert";
 
 export default function AvailableVaccines() {
   const [plist, setplist] = useState([]);
-
   const [name, setname] = useState();
   //-----------------------------------------------------------------------
   //add new vaccine
@@ -113,7 +112,7 @@ export default function AvailableVaccines() {
               </tr>
             </thead>
             <tbody align="center" style={{ fontSize: "19px" }}>
-              {plist.map((ob) => (
+              {plist?.map((ob) => (
                 <tr>
                   <td>{ob.vid}</td>
                   <td>{ob.vname}</td>

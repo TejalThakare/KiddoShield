@@ -30,6 +30,7 @@
     color: #444;
     line-height: 1.9;
     background-color: #ffffff;
+ 
   }
   /* GENERAL ELEMENTS */
   .section {
@@ -70,10 +71,10 @@
   
  
   
-  /* .lazy-img {
+  .lazy-img {
     filter: blur(5px);
   }
-   */
+  
   
   /* HEADER */
   .header {
@@ -304,3 +305,5 @@
   margin-left: 15%;
   margin-bottom: 2%;
 } 
+
+

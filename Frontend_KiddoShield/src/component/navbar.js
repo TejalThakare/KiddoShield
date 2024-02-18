@@ -2,8 +2,9 @@ import { useState } from "react";
 import "../styles/Navbar.css";
 // import Login from "../pages/user_login_registration/login";
 import Login from "../pages/user_login_registration/login";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 export default function Navbar() {
+  const { uid } = useParams();
   const [open, close] = useState(false); //for login pop up
   const modalHandler = () => {
     close(true);
@@ -22,8 +23,8 @@ export default function Navbar() {
         />
         <ul className="nav__links">
           <li className="nav__item">
-            <Link className="nav__link" to="/ChildDashboard/2">
-              Children Details
+            <Link className="nav__link" to={`/ChildDashboard/ ${uid}`}>
+              Profile
             </Link>
           </li>
           <li className="nav__item">

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../styles/registration.css";
 import userService from "../../service/userService";
 import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 export default function Registration() {
+  const navigate = useNavigate();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [formdata, setFormdata] = useState({
     fname: "",
@@ -17,6 +19,7 @@ export default function Registration() {
   useEffect(() => {
     if (showSuccessModal && formdata.username) {
       userService.registerUser(formdata);
+      navigate("/");
     }
   }, [showSuccessModal, formdata]);
 
@@ -39,7 +42,7 @@ export default function Registration() {
         address: uaddress,
         contact: unumber,
       });
-
+      console.log(uemail);
       // Validate mobile number
       if (!/^\d{7,15}$/.test(unumber)) {
         swal("Mobile number should be between 7 and 15 digits.");
@@ -69,6 +72,9 @@ export default function Registration() {
       swal("something went wrong");
       if (error.response && error.response.status === 404) {
         swal("Enter unique email ID");
+      } else {
+        swal("something went wrong");
+        window.location.reload();
       }
     }
   };

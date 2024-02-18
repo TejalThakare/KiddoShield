@@ -2,15 +2,14 @@ import axios from "axios";
 let baseUrl = "http://localhost:8086/Hospital";
 class HospitalService {
   //hospital registration
+
   registerHospital(data) {
     return axios.post(baseUrl + "/Registerhospital", data);
   }
-
   //hospital login
   loginHospital(data) {
     return axios.post(baseUrl + "/loginhospital", data);
   }
-
   //get all children
   getChildren() {
     let hid = 1;
@@ -58,6 +57,10 @@ class HospitalService {
   getAllFeedback() {
     let hid = 1;
     return axios.get(baseUrl + "/feedbacks/" + hid);
+  }
+  //get Children history
+  getChildrenHistory(){
+    
   }
 }
 export default new HospitalService();
