@@ -27,6 +27,16 @@ public class ChildDto {
 	
 	
 	
+	
+	public ChildDto(String cfname, int age, double weight, String bloodgrp, char gender, String dob) {
+		super();
+		this.cfname = cfname;
+		this.age = age;
+		this.weight = weight;
+		this.bloodgrp = bloodgrp;
+		this.gender = gender;
+		this.dob = dob;
+	}
 	public ChildDto(int cid, String cfname, int age, double weight, String bloodgrp, char gender, String dob, int uid) {
 		super();
 		this.cid = cid;

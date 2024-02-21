@@ -1,20 +1,15 @@
 package com.example.RegisterLogin.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="child")
 public class Child {
 	@Id
 	@Column(name="cid", length = 10)
-    
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int cid;
 	private String cfname;
 	private int age;
@@ -22,9 +17,13 @@ public class Child {
 	private String bloodgrp;
 	private char gender;
 	private String dob;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="uid", nullable=false)
     private User user;
+//	@ManyToOne
+//    @JoinColumn(name="hid", nullable=false)
+//	private Hospital hospital;
+	
 	public Child(int cid, String cfname, int age, double weight, String bloodgrp, char gender, String dob,
 			User user) {
 		super();
@@ -94,18 +93,28 @@ public class Child {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
+	@JsonBackReference
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
-	@Override
-	public String toString() {
-		return "Child [cid=" + cid + ", cfname=" + cfname + ", age=" + age + ", weight=" + weight + ", bloodgrp="
-				+ bloodgrp + ", gender=" + gender + ", dob=" + dob + ", user=" + user + "]";
-	}
-	
+//	@JsonBackReference
+//	public Hospital getHospital() {
+//		return hospital;
+//	}
+//
+//	public void setHospital(Hospital hospital) {
+//		this.hospital = hospital;
+//	}
+
+//	@Override
+//	public String toString() {
+//		return "Child [cid=" + cid + ", cfname=" + cfname + ", age=" + age + ", weight=" + weight + ", bloodgrp="
+//				+ bloodgrp + ", gender=" + gender + ", dob=" + dob + ", user=" + user + "]";
+//	}
+//	
 	
 
 }

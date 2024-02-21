@@ -18,6 +18,23 @@ public class HospitalDto {
 		super();
 	}
 	
+	public HospitalDto(String hname, String email, String password) {
+		super();
+		this.hname = hname;
+		this.email = email;
+		this.password = password;
+	}
+
+	public HospitalDto(int hid, String hname, String address, String contact, String emergencynum, String email) {
+		super();
+		this.hid = hid;
+		this.hname = hname;
+		this.address = address;
+		this.contact = contact;
+		this.emergencynum = emergencynum;
+		this.email = email;
+	}
+
 	public HospitalDto(int hid, String hname, String address, String contact, String emergencynum, String email,
 			String password) {
 		super();

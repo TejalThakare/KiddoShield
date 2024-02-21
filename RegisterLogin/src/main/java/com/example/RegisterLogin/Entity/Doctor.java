@@ -1,17 +1,18 @@
 package com.example.RegisterLogin.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import java.util.Set;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="doctor")
 public class Doctor {
 	@Id
 	@Column(name="did", length = 10)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int did;
 	private String dfname;
 	private String dlname;
@@ -20,10 +21,16 @@ public class Doctor {
 	@ManyToOne
     @JoinColumn(name="hid", nullable=false)
 	private Hospital hospital;
+	@Column(unique=true)
 	private String email;
 	private String password;
 	
-	
+	@OneToMany(mappedBy="doctor", cascade= CascadeType.ALL, orphanRemoval=true)
+	private Set<ConsultationAppointment>ConsultationAppointment;
+
+	public Doctor() {
+		super();
+	}
 
 	public Doctor(int did, String dfname, String dlname, String contact, String specialization, String email,
 			String password) {
@@ -68,12 +75,16 @@ public class Doctor {
 	public void setDlname(String dlname) {
 		this.dlname = dlname;
 	}
+	
 	public String getContact() {
 		return contact;
 	}
+
 	public void setContact(String contact) {
-		contact = contact;
+		this.contact = contact;
 	}
+
+	@JsonBackReference
 	public Hospital getHospital() {
 		return hospital;
 	}
@@ -100,6 +111,15 @@ public class Doctor {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@JsonManagedReference
+	public Set<ConsultationAppointment> getConsultationAppointment() {
+		return ConsultationAppointment;
+	}
+
+	public void setConsultationAppointment(Set<ConsultationAppointment> consultationAppointment) {
+		ConsultationAppointment = consultationAppointment;
+	}
+
 	@Override
 	public String toString() {
 		return "Doctor [did=" + did + ", dfname=" + dfname + ", dlname=" + dlname + ", contact=" + contact

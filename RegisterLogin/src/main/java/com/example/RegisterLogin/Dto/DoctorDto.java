@@ -13,6 +13,22 @@ public class DoctorDto {
 	private int hid;
 	
 	
+	public DoctorDto() {
+		super();
+	}
+	
+
+	public DoctorDto(int did, String dfname, String dlname, String contact, String email, String specialization) {
+		super();
+		this.did = did;
+		this.dfname = dfname;
+		this.dlname = dlname;
+		this.contact = contact;
+		this.email = email;
+		this.specialization = specialization;
+	}
+
+
 	public DoctorDto(int did, String dfname, String dlname, String contact, String email, String password,
 			String specialization) {
 		super();
@@ -60,7 +76,7 @@ public class DoctorDto {
 		return contact;
 	}
 	public void setContact(String contact) {
-		contact = contact;
+		this.contact = contact;
 	}
 	public String getSpecialization() {
 		return specialization;

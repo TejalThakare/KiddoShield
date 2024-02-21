@@ -1,11 +1,6 @@
 package com.example.RegisterLogin.Dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 
 public class UserDto {
 	
@@ -24,7 +19,37 @@ public class UserDto {
 	public UserDto() {
 		super();
 	}
-	public UserDto(int uid, String fname, String lname, String username, String password, String email, String address,
+	
+	public UserDto(String username, String password, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+
+	public UserDto(String fname, String lname, String username, String email, String address, String contact) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.contact = contact;
+	}
+	
+
+	public UserDto(int uid, String fname, String lname, String username, String email, String address, String contact) {
+		super();
+		this.uid = uid;
+		this.fname = fname;
+		this.lname = lname;
+		this.username = username;
+		this.email = email;
+		this.address = address;
+		this.contact = contact;
+	}
+
+	public UserDto(int uid, String fname, String lname, String username, String email,  String password,String address,
 			String contact) {
 		super();
 		this.uid = uid;
@@ -37,7 +62,7 @@ public class UserDto {
 		this.contact = contact;
 	}
 	
-	public UserDto(int uid, String fname, String lname, String username, String password, String email, String address,
+	public UserDto(int uid, String fname, String lname, String username,  String email, String password,String address,
 			String contact, int hid) {
 		super();
 		this.uid = uid;
@@ -106,10 +131,10 @@ public class UserDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@Override
-	public String toString() {
-		return "UserDto [uid=" + uid + ", fname=" + fname + ", lname=" + lname + ", username=" + username
-				+ ", password=" + password + ", email=" + email + ", address=" + address + ", contact=" + contact + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "UserDto [uid=" + uid + ", fname=" + fname + ", lname=" + lname + ", username=" + username
+//				+ ", password=" + password + ", email=" + email + ", address=" + address + ", contact=" + contact + "]";
+//	}
 
 }

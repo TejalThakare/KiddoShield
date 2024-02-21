@@ -2,28 +2,34 @@ package com.example.RegisterLogin.Entity;
 
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="hospital")
 public class Hospital {
 	@Id
 	@Column(name="hid", length = 10)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int hid;
 	private String hname;
 	private String address;
 	private String contact;
 	private String emergencynum;
+	@Column(unique=true)
 	private String email;
 	private String password;
-	@OneToMany(mappedBy="hospital")
+	@OneToMany(mappedBy="hospital", cascade= CascadeType.ALL, orphanRemoval=true)
 	private Set<User>User;
-	@OneToMany(mappedBy="hospital")
+	@OneToMany(mappedBy="hospital", cascade= CascadeType.ALL, orphanRemoval=true)
 	private Set<Doctor>Doctor;
+	@OneToMany(mappedBy="hospital", cascade= CascadeType.ALL, orphanRemoval=true)
+	private Set<Vaccine>vaccine;
+	@OneToMany(mappedBy="hospital", cascade= CascadeType.ALL, orphanRemoval=true)
+	private Set<Feedback>Feedback;
+	@OneToMany(mappedBy="hospital", cascade= CascadeType.ALL, orphanRemoval=true)
+	private Set<Appointment>Appointment;
 	public Hospital() {
 		super();
 	}
@@ -109,7 +115,7 @@ public class Hospital {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	@JsonManagedReference
 	public Set<User> getUser() {
 		return User;
 	}
@@ -117,14 +123,42 @@ public class Hospital {
 	public void setUser(Set<User> user) {
 		this.User = user;
 	}
+	@JsonManagedReference
+	public Set<Doctor> getDoctor() {
+		return Doctor;
+	}
 
-//	public Set<Doctor> getDoctor() {
-//		return doctor;
-//	}
-//
-//	public void setDoctor(Set<Doctor> doctor) {
-//		this.doctor = doctor;
-//	}
+	public void setDoctor(Set<Doctor> doctor) {
+		Doctor = doctor;
+	}
+@JsonManagedReference
+
+	public Set<Vaccine> getVaccine() {
+		return vaccine;
+	}
+
+	public void setVaccine(Set<Vaccine> vaccine) {
+		this.vaccine = vaccine;
+	}
+	@JsonManagedReference
+	public Set<Feedback> getFeedback() {
+		return Feedback;
+	}
+
+	public void setFeedback(Set<Feedback> feedback) {
+		Feedback = feedback;
+	}
+	@JsonManagedReference
+	public Set<Appointment> getAppointment() {
+		return Appointment;
+	}
+
+	public void setAppointment(Set<Appointment> appointment) {
+		Appointment = appointment;
+	}
+	
+	
+	
 
 //	@Override
 //	public String toString() {
