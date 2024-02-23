@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+         }
+          th, td {
+           
+            text-align: left;
+            padding: 8px;
+             }
+       .read-more-btn {
+            cursor: pointer;
+            color: blue;
+            
+        }
+        .header1{
+            align-self: center;
+        }
+
+
+        /* new style */
+
+
+
+        
+    .read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+
+/* ----- */
+  
+  </style>
+  
+
+
+
+    </script>
+    <title>Diseases and Description</title>
+</head>
+<body>
+
+<h2 style="text-align: center;">Diseases and Description</h2>
+
+<table style="border: none;">
+    <thead>
+        <tr>
+            <th style="width: 50%; text-align:center;">Diseases</th>
+           
+            <th style="width: 50%; text-align:center;">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        <tr>
+            <td style="text-align: center;">Asthma</td>
+            </td>
+          
+        <td>
+         
+            <div class="read">
+              <input type="checkbox" class="read-more-state" id="post-1" />
+                  <p class="read-more-wrap">  In childhood asthma, the lungs and airways become easily inflamed when exposed to certain triggers. <br> <span id="more-1" class="read-more-target">
+                       Such triggers include inhaling pollen or catching a cold or other respiratory infection.
+                         Childhood asthma can cause irritating daily symptoms that interfere with play, 
+                        sports, school and sleep. In some children, 
+                        unmanaged asthma can cause dangerous asthma attacks</span></p>
+                        <label for="post-1" class="read-more-trigger"></label>
+                </div>
+            </td>
+        </tr>
+           
+        <tr>
+          <td style="text-align: center;">Bronchiolitis</td>
+          </td>
+        
+      <td>
+       
+          <div class="read">
+            <input type="checkbox" class="read-more-state" id="post-2" />
+           <p class="read-more-wrap"> Bronchiolitis is most common in babies under six months, but sometimes occurs in babies up to 12 months old. <br><span class="read-more-target">
+              Bronchiolitis is a common chest infection in young children, caused by a viral infection of the lungs. 
+              The infection causes inflammation and mucus to build up in the airways, making it more difficult to breathe.</span></p>
+              <label for="post-2" class="read-more-trigger"></label>
+              </div>
+          </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: center;">Chickenpox</td>
+        </td>
+      
+    <td>
+     
+        <div class="read">
+          <input type="checkbox" class="read-more-state" id="post-3" />
+         <p class="read-more-wrap"> Treatment aims to ease symptoms until the illness goes. <br> <span class="read-more-target">Full recovery is usual in children aged under 12 years. 
+          Serious complications are rare but are more likely to occur in children with a poor immune system, 
+          such as those on chemotherapy.</span></p>
+          <label for="post-3" class="read-more-trigger"></label>
+              
+            </div>
+        </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">Cold</td>
+      </td>
+    
+  <td>
+   
+      <div>
+        <input type="checkbox" class="read-more-state" id="post-4" />
+        <p class="read-more-wrap">Most coughs and colds are caused by viruses and get better on their own within a week. <span  class="read-more-target">
+          The best treatment for most coughs and colds is rest.If your child is unwell, keep them at home to rest and recover. This way, their immune system can fight the virus.</span></p>
+        <label for="post-4" class="read-more-trigger"></label>
+             
+          </div>
+      </td>
+  </tr>
+  <tr>
+    <td style="text-align: center;">Croup</td>
+    </td>
+  
+<td>
+ 
+  <div>
+    <input type="checkbox" class="read-more-state" id="post-5" />
+  
+    <p class="read-more-wrap">Kids with croup have a virus that makes their airways swell. <span class="read-more-target">
+      They have a telltale "barking" cough (often compared to the sound of a seal's bark) and a raspy voice, 
+      and make a high-pitched, squeaky noise when they breathe.Most kids with croup get better in a week or so.
+    </span></p>
+    
+    <label for="post-5" class="read-more-trigger"></label>
+  </div>
+    </td>
+</tr>
+
+
+<tr>
+  <td style="text-align: center;">Diarrhoea and vomiting</td>
+  </td>
+
+<td>
+
+<div>
+  <input type="checkbox" class="read-more-state" id="post-6" />
+
+  <p class="read-more-wrap">Diarrhea and vomiting are managed by preventing dehydration (loss of too much fluid).<span class="read-more-target">
+    To prevent dehydration, make sure your child drinks lots of fluids. 
+    They need to drink enough fluids to meet what they need each day and replace the ones they lose with vomiting or diarrhea..
+  </span></p>
+  
+  <label for="post-6" class="read-more-trigger"></label>
+</div>
+  </td>
+</tr>
+
+
+<tr>
+  <td style="text-align: center;">Feaver In children</td>
+  </td>
+
+<td>
+
+<div>
+  <input type="checkbox" class="read-more-state" id="post-7" />
+
+  <p class="read-more-wrap">A fever occurs when your child's body temperature is higher than normal.<span class="read-more-target">
+    Normal body temperature varies a little, but a temperature above 38°C is definitely considered a fever. 
+    Some sites will give 37.5°C or 37.8°C as the upper range of normal - for consistency, 
+    this article will use 38°C as the cut-off for a high temperature.
+  </span></p>
+  
+  <label for="post-7" class="read-more-trigger"></label>
+</div>
+  </td>
+</tr>
+
+<tr>
+  <td style="text-align: center;">Measles</td>
+  </td>
+
+<td>
+
+<div>
+  <input type="checkbox" class="read-more-state" id="post-8" />
+
+  <p class="read-more-wrap">ASome people think of measles as just a little rash and fever that clears up in a few days.<span class="read-more-target">
+    But measles can cause serious health complications, especially in children younger than 5 years of age. 
+    There is no way to tell in advance the severity of the symptoms your child will experience.
+  </span></p>
+  
+  <label for="post-8" class="read-more-trigger"></label>
+</div>
+  </td>
+</tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

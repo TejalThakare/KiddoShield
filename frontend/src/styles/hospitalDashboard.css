@@ -1,0 +1,31 @@
+#hospital-dashboard{
+    width: 500px;
+    height: 500px;
+    background-color:#eaf2f0;
+    border: 2px solid black;
+    padding: 10px;
+    margin-left: -20px;
+}
+
+
+#container-dashboard{
+    margin-top: 5%;
+    margin-left: 11%;
+    max-height: 500px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    max-width: 80%;
+}
+
+div > div >p{
+    font-size: 15px;
+}
+
+
+
+  
+  .blur {
+    filter: blur(5px); /* Apply blur effect to background */
+    pointer-events: none; /* Disable pointer events on blurred elements */
+  }

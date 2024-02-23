@@ -1,0 +1,51 @@
+
+#navbar--id{
+    height: 9%;
+}
+
+  .nav.sticky {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+.vaccine-age{
+    font-size: 15px;
+}
+
+
+#vaccine-container {
+    display: flex;
+    margin-top: 8%;
+    margin-bottom: 6%;
+}
+.left {
+    width: 300px;
+    position: -ms-sticky;
+    position: sticky;
+    top: 18%;
+    height: 100%;
+    /* margin-top: 3%; */
+}
+
+.right {
+    width: 800px;
+    height: 100%;
+    margin-right: -10% ;
+   
+}
+
+.table
+{
+    cursor: pointer;
+   
+}
+
+.vacc-by-age{
+    margin-bottom: 7%;
+    font-size: 20px;
+    color: #4bbb7d;
+
+    font-weight: bold;
+}
+
+  
