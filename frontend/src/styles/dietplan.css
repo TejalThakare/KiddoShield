@@ -1,0 +1,15 @@
+.leftcontainer{
+    width: 300px;
+    position: -ms-sticky;
+    position: sticky;
+    top: 18%;
+    height: 100%;
+}
+
+.rightcontainer{
+    width: 800px;
+    height: 100%;
+    margin-left: 35%;
+    /* margin-right: 0% ; */
+    margin-top: -20%;
+}

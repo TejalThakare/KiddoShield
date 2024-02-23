@@ -1,0 +1,45 @@
+
+
+/* .leftFeedback {
+    width: 300px;
+    position: -ms-sticky;
+    position: sticky;
+    top: 18%;
+    height: 100%;
+} */
+.feedbackHeader{
+    margin-top: 100%;
+    margin-left: -16%;
+    font-size: 70px;
+    color: #4bbb7d;
+
+    font-weight: bold;
+}
+/* .rightfeedback {
+    width: 800px;
+    height: 100%;
+   
+} */
+
+#feedback-container {
+    display: flex;
+  }
+  
+  .leftFeedback{
+    width: 10%;
+    position: -ms-sticky;
+    position: sticky;
+    top: 10%;
+    height: 100%;
+  }
+  .rightFeedback {
+    width: 90%;
+    height: 100%;
+    margin-left: 30%;
+    margin-right: -25%;
+    margin-top:  10%;
+    margin-bottom: 10%;
+  }
+  #card-feedback{
+    width: 100%;
+  }
