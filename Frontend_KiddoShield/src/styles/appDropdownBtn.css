@@ -1,9 +1,0 @@
- #dropdown-menu{
-    width: 150%;
-    font-size: medium;
-    background-color: rgb(240, 240, 240) ;
-
-  }
-  #dropdown-menu:hover{
-    cursor: pointer;
-  }
