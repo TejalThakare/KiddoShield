@@ -22,4 +22,8 @@ public interface VaccineRepo extends JpaRepository<Vaccine,Integer> {
     int decrementDoses(String vname);
 	@Query(value="select avdoses from vaccine where vname=:vname",nativeQuery=true)
 	int getavdoses(String vname);
+	@Transactional
+	@Modifying
+    @Query(value="update Vaccine v SET v.avdoses = v.avdoses + 1 WHERE v.vname=:vname AND v.avdoses > 0",nativeQuery=true)
+    int incrementDoses(String vname);
 }

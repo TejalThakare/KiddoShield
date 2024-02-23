@@ -261,7 +261,7 @@ public class HospitalController {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
-	@GetMapping("doctorinfo")
+	@PostMapping("doctorinfo")
 	ResponseEntity<Doctor>getdoctorinfo(@RequestBody DoctorloginDto ddto){
 		System.out.println(ddto.getEmail()+ddto.getPassword());
 		Doctor doc=hosservice.finddocbymailandpassword(ddto.getEmail(),ddto.getPassword());

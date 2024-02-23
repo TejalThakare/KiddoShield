@@ -19,6 +19,13 @@ private int caid;
 	public ConsultationAppointmentDto() {
 		super();
 	}
+	
+	public ConsultationAppointmentDto(LocalDate date, LocalTime time) {
+		super();
+		this.date = date;
+		this.time = time;
+	}
+
 	public ConsultationAppointmentDto(int caid, int cid, LocalDate date, LocalTime time, String contact, String email,
 			String specialization, int did, int uid) {
 		super();

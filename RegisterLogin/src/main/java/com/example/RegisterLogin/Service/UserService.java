@@ -40,4 +40,10 @@ public interface UserService {
 	Set<ConsultationAppointment> getallconsultappointment(int uid);
 	void saveUser(User u);
 	int decrementDoses(String vname);
+	Appointment findbyaid(int aid);
+	void deleteAppointment(int aid);
+	ConsultationAppointment findbycaid(int caid);
+	void deleteConsultAppointment(int caid);
+	int incrementDoses(String vname);
+	void rescheduleconsultappointment(int caid, ConsultationAppointmentDto cadto);
 }

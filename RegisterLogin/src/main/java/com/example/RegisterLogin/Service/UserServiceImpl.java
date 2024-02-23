@@ -285,5 +285,57 @@ private ConsultAppointmentRepo carepo;
 		return vrepo.decrementDoses(vname);
 	}
 
+	@Override
+	public Appointment findbyaid(int aid) {
+		Optional<Appointment> a=arepo.findById(aid);
+		if(a.isPresent()) {
+			return a.get();
+		}
+		return null;
+	}
+
+	@Override
+	public void deleteAppointment(int aid) {
+		Appointment a=findbyaid(aid);
+		if(a!=null) {
+			arepo.deleteById(aid);
+		}
+	}
+
+	@Override
+	public ConsultationAppointment findbycaid(int caid) {
+		Optional<ConsultationAppointment> ca=carepo.findById(caid);
+		if(ca.isPresent()) {
+			return ca.get();
+		}
+		return null;
+	}
+
+	@Override
+	public void deleteConsultAppointment(int caid) {
+		ConsultationAppointment ca=findbycaid(caid);
+		if(ca!=null) {
+			carepo.deleteById(caid);
+		}
+		
+	}
+
+	@Override
+	public int incrementDoses(String vname) {
+		
+		return vrepo.incrementDoses(vname);
+	}
+
+	@Override
+	public void rescheduleconsultappointment(int caid, ConsultationAppointmentDto cadto) {
+		Optional<ConsultationAppointment> ca=carepo.findById(caid);
+		if(ca.isPresent()) {
+			ConsultationAppointment c1=ca.get();
+			c1.setDate(cadto.getDate());
+			c1.setTime(cadto.getTime());
+			carepo.save(c1);
+		}
+	}
+
 
 }

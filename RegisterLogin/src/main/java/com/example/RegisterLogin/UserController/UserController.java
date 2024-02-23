@@ -36,7 +36,7 @@ import com.example.RegisterLogin.payload.response.LoginMesage;
 @CrossOrigin(origins="*")
 @RequestMapping("api/User")
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -198,11 +198,11 @@ public class UserController {
 				userService.saveUser(u);
 				return ResponseEntity.ok("password reset successfully");
 			}
-			
+
 
 		}
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-		}
+	}
 	@GetMapping("childhistory/{uid}")
 	public ResponseEntity<List<Object[]>>getchildhistory(@PathVariable int uid){
 		List<Object[]> chset=userService.fetchChildData(uid);
@@ -210,7 +210,7 @@ public class UserController {
 			return ResponseEntity.ok(chset);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		
+
 	}
 	@PostMapping("consultappointment/{uid}")
 	ResponseEntity<String> bookconsultappointment(@PathVariable int uid,@RequestBody ConsultationAppointmentDto cdto){
@@ -221,7 +221,7 @@ public class UserController {
 		}
 		else {
 			System.out.println("hiiii");
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();}
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();}
 	}
 	@GetMapping("consultappointments/{uid}")
 	public ResponseEntity<Set<ConsultationAppointment>> getallconsultappointments(@PathVariable int uid){
@@ -230,6 +230,34 @@ public class UserController {
 			return ResponseEntity.ok(aset);
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+	@DeleteMapping("appointment/{aid}")
+	public ResponseEntity<String>deleteAppointment(@PathVariable int aid){
+		Appointment a=userService.findbyaid(aid);
+		if(a!=null) {
+			userService.deleteAppointment(aid);
+			int a1=userService.incrementDoses(a.getVname());
+
+			return ResponseEntity.ok("Appointment deleted successfully");}
+		else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+
+	@DeleteMapping("consultappointment/{caid}")
+	public ResponseEntity<String>deleteConsultAppointment(@PathVariable int caid){
+		ConsultationAppointment ca=userService.findbycaid(caid);
+		if(ca!=null) {
+			userService.deleteConsultAppointment(caid);
+			return ResponseEntity.ok("ConsultAppointment deleted successfully");}
+		else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+	@PutMapping("/rescheduleconsultappointment/{caid}")
+	public ResponseEntity<String>rescheduleconsultappointment(@PathVariable int caid,@RequestBody ConsultationAppointmentDto cadto){
+		userService.rescheduleconsultappointment(caid, cadto);
+		return ResponseEntity.ok("appointment reschedule successfully");
 	}
 }
 
