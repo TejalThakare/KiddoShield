@@ -1,8 +1,9 @@
-namespace Models;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+namespace Models
+{
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Doctor
     {
@@ -43,4 +44,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 
         [JsonIgnore] // Assuming you're using Newtonsoft.Json for serialization
         public ICollection<ConsultationAppointment> ConsultationAppointments { get; set; }
+
+
+        // Constructor
+        public Doctor()
+        {
+            ConsultationAppointments = new List<ConsultationAppointment>();
+        }
+
+        // Constructor with parameters
+        public Doctor(string dfname, string dlname, string contact, string specialization, int hid, string email, string password)
+            : this() // Calls the default constructor to initialize the collection
+        {
+            Dfname = dfname;
+            Dlname = dlname;
+            Contact = contact;
+            Specialization = specialization;
+            Hid = hid;
+            Email = email;
+            Password = password;
+        }
+        public Doctor(string dfname, string dlname, string contact, string specialization, string email, string password)
+         : this()
+        {
+            Dfname = dfname;
+            Dlname = dlname;
+            Contact = contact;
+            Specialization = specialization;
+            Email = email;
+            Password = password;
+        }
     }
+}

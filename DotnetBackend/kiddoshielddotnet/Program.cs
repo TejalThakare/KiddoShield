@@ -1,6 +1,6 @@
-using Dbcontext;
+using DbcontextClass;
 using Microsoft.EntityFrameworkCore;
-
+using HospitalServices;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +9,9 @@ builder.Services.AddDbContext<KiddoDBContext>(options =>
 {
     options.UseMySQL(connectionString);
 });
+builder.Services.AddScoped<IHospitalService, HospitalService>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 
 var app = builder.Build();
@@ -18,14 +21,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-
-app.UseRouting();
-
 app.UseAuthorization();
 
-app.MapControllers(); // This line maps controllers to handle incoming requests.
+app.MapControllers();
 
 app.Run();

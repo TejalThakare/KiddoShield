@@ -21,5 +21,17 @@ public class Vaccine
     [Required]
     public int Hid { get; set; }
     public Hospital Hospital { get; set; }
+    public Vaccine()
+    {
+        // Initialize properties if needed
+    }
+
+    // Additional constructor with parameters
+    public Vaccine(string vname, int avdoses, int hid)
+    {
+        Vname = vname;
+        Avdoses = avdoses;
+        Hid = hid;
+    }
 }
 

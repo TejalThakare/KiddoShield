@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
-namespace Dbcontext;
+namespace DbcontextClass;
 
 public class KiddoDBContext : DbContext
 {
@@ -8,7 +8,7 @@ public class KiddoDBContext : DbContext
     public DbSet<Doctor> Doctors { get; set; }
     public DbSet<ConsultationAppointment> ConsultationAppointments { get; set; }
     public DbSet<Hospital> Hospitals { get; set; }
-
+    public DbSet<Vaccine> Vaccines { get; set; }
     // Constructor
     public KiddoDBContext(DbContextOptions<KiddoDBContext> options) : base(options)
     {
