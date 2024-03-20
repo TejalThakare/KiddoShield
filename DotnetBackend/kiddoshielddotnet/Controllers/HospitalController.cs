@@ -5,6 +5,10 @@ using DbcontextClass;
 using Models;
 using HospitalServices;
 using vaccineDto;
+using doctorDto;
+using hospitalLoginDto;
+using doctorLoginDto;
+using hospitalDto;
 
 [ApiController]
 [Route("kiddoshield/[controller]")]
@@ -16,7 +20,7 @@ public class HospitalController : ControllerBase
     {
         _hospitalService = hospitalService;
     }
-
+    //Register hospital
     [HttpPost]
     [Route("registerHospital")]
     public string AddHospital(Hospital hospital)
@@ -24,6 +28,7 @@ public class HospitalController : ControllerBase
         return _hospitalService.AddHospital(hospital);
     }
 
+    //get hospital
     [HttpGet]
     [Route("getAllHospital")]
     public List<Hospital> GetHospitals()
@@ -36,19 +41,77 @@ public class HospitalController : ControllerBase
         else return null;
     }
 
+    //login hospital
     [HttpPost]
-    [Route("registerDoctor/{hid}")]
-    public string RegisterDoctor(Doctor doctor, int hid)
+    [Route("loginHospital")]
+    public string HospitalLogin(HospitalloginDto hospitallogindto)
     {
-        Console.WriteLine("sdddddddddddddddddddddddddddddddddddddd");
-        return _hospitalService.RegisterDoctor(doctor, hid);
+        string messaage = _hospitalService.HospitalLogin(hospitallogindto);
+        return messaage;
     }
 
+    // register doctor
+    [HttpPost]
+    [Route("registerDoctor/{hid}")]
+    public string RegisterDoctor(DoctorDto doctordto, int hid)
+    {
+        return _hospitalService.RegisterDoctor(doctordto, hid);
+    }
+
+    //Delete Doctor
+    [HttpDelete]
+    [Route("deleteHospital/{hid}")]
+    public string DeleteHospital(int hid)
+    {
+        return _hospitalService.DeleteHospital(hid);
+    }
+
+    //Login Doctor
+    [HttpPost]
+    [Route("loginDoctor")]
+    public string LoginDoctor(DoctorloginDto doctorlogindto)
+    {
+        return _hospitalService.LoginDoctor(doctorlogindto);
+    }
+
+    //update Hospital info
+    [HttpPut]
+    [Route("updateHospital/{hid}")]
+    public string UpdateHospital(HospitalDto hospitaldto)
+    {
+        return _hospitalService.UpdateHospital(hospitaldto);
+    }
+
+    //Delete Doctor
+    [HttpDelete]
+    [Route("deleteDoctor/{did}")]
+    public string DeleteDoctor(int did)
+    {
+        return _hospitalService.DeleteDoctor(did);
+    }
+
+    //update doctor info
+    [HttpPut]
+    [Route("updateDoctor/{did}")]
+    public string UpdateDoctor(int did, DoctorDto doctordto)
+    {
+        return _hospitalService.UpdateDoctor(did, doctordto);
+    }
+
+    // register vaccine
     [HttpPost]
     [Route("registerVaccine/{hid}")]
     public string RegisterVaccine(VaccineDto vaccineDto, int hid)
     {
         return _hospitalService.RegisterVaccine(vaccineDto, hid);
+    }
+
+    //Get all doctors
+    [HttpGet]
+    [Route("getAllDoctors/{hid}")]
+    public List<Doctor> GetAllDoctors(int hid)
+    {
+        return _hospitalService.GetAllDoctors(hid);
     }
 
 }
