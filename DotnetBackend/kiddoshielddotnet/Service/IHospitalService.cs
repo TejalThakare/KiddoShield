@@ -4,6 +4,7 @@ using doctorDto;
 using doctorLoginDto;
 using hospitalDto;
 using hospitalLoginDto;
+using integerDto;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using vaccineDto;
@@ -20,5 +21,8 @@ public interface IHospitalService
     string UpdateDoctor(int did, DoctorDto doctordto);
     string DeleteHospital(int hid);
     string UpdateHospital(HospitalDto hospitaldto);
-    List<Doctor>  GetAllDoctors(int hid);
+    List<Doctor> GetAllDoctors(int hid);
+    HashSet<Vaccine> GetAllVaccines(int hid);
+    string UpdateVaccineDoses(int vid, IntegerDto integerdto);
+    List<Appointment> GetallAppointments(int hid);
 }

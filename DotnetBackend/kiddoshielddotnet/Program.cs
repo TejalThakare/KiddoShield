@@ -1,6 +1,7 @@
 using DbcontextClass;
 using Microsoft.EntityFrameworkCore;
 using HospitalServices;
+using userservice;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<KiddoDBContext>(options =>
     options.UseMySQL(connectionString);
 });
 builder.Services.AddScoped<IHospitalService, HospitalService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 

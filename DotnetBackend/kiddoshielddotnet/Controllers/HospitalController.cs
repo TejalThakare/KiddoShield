@@ -9,6 +9,7 @@ using doctorDto;
 using hospitalLoginDto;
 using doctorLoginDto;
 using hospitalDto;
+using integerDto;
 
 [ApiController]
 [Route("kiddoshield/[controller]")]
@@ -106,6 +107,14 @@ public class HospitalController : ControllerBase
         return _hospitalService.RegisterVaccine(vaccineDto, hid);
     }
 
+    //Get All vaccine
+    [HttpGet]
+    [Route("getAllVaccine/{hid}")]
+    public HashSet<Vaccine> GetAllVaccines(int hid)
+    {
+        return _hospitalService.GetAllVaccines(hid);
+    }
+
     //Get all doctors
     [HttpGet]
     [Route("getAllDoctors/{hid}")]
@@ -113,5 +122,19 @@ public class HospitalController : ControllerBase
     {
         return _hospitalService.GetAllDoctors(hid);
     }
+    //update vaccine doses
+    [HttpPut]
+    [Route("addDoses/{vid}")]
+    public string UpdateVaccineDoses(int vid, IntegerDto integerdto)
+    {
+        return _hospitalService.UpdateVaccineDoses(vid, integerdto);
+    }
 
+    //get all appointments ------------------not checked 
+    [HttpGet]
+    [Route("getapp/{hid}")]
+    public List<Appointment> GetallAppointments(int hid)
+    {
+        return _hospitalService.GetallAppointments(hid);
+    }
 }

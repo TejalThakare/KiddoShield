@@ -13,6 +13,8 @@ public class Child
 
     [Required]
     public string Age { get; set; }
+    [Required]
+    public char Gender { get; set; }
 
     [Required]
     public double Weight { get; set; }

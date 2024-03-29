@@ -7,6 +7,7 @@ using doctorDto;
 using doctorLoginDto;
 using hospitalDto;
 using hospitalLoginDto;
+using integerDto;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -197,5 +198,59 @@ public class HospitalService : IHospitalService
         }
         return null;
 
+    }
+
+    //get all vaccine;
+    public HashSet<Vaccine> GetAllVaccines(int hid)
+    {
+        Hospital hospital = _dbContext.Hospitals.FirstOrDefault(x => x.Hid == hid);
+        HashSet<Vaccine> vaccine = new HashSet<Vaccine>();
+        if (hospital != null)
+        {
+            var hospitalVaccines = _dbContext.Vaccines
+                .Where(v => v.Hid == hospital.Hid)
+                .ToList();
+
+            foreach (var item in hospitalVaccines)
+            {
+                vaccine.Add(item);
+                item.Hospital = null;
+
+            }
+            return vaccine;
+        }
+        return vaccine;
+    }
+    //update vaccine doses
+    public string UpdateVaccineDoses(int vid, IntegerDto integerdto)
+    {
+        Vaccine vaccine = _dbContext.Vaccines.Find(vid);
+        if (vaccine != null)
+        {
+            vaccine.Avdoses = integerdto.Avdoses;
+            vaccine.Vname = vaccine.Vname;
+            vaccine.Hid = vaccine.Hid;
+            _dbContext.Vaccines.Update(vaccine);
+            _dbContext.SaveChanges();
+            return "Success ";
+        }
+        return "not found";
+
+    }
+    public List<Appointment> GetallAppointments(int hid)
+    {
+        Hospital hospital = _dbContext.Hospitals.FirstOrDefault(x => x.Hid == hid);
+        List<Appointment> appo = new List<Appointment>();
+        if (hospital != null)
+        {
+            var appointments = _dbContext.Appointments.Where(x => x.Hid == hid).ToList();
+            foreach (var item in appointments)
+            {
+                appo.Add(item);
+                item.Hospital = null;
+            }
+            return appo;
+        }
+        return appo;
     }
 }

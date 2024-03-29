@@ -61,7 +61,7 @@ namespace kiddoshielddotnet.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     uid = table.Column<int>(type: "int", nullable: false)
